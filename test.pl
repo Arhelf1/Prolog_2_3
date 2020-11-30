@@ -8,4 +8,11 @@ rlist([Text|List],N):- read(Text), N1 is N-1, rlist(List,N1).
 wlist([]):-!. 
 wlist([Text|List]):- write(Text), write(" "), wlist(List).
 
+%Теперь нужна проверка простоты числа
+pr(X):- 0 =\= X mod 2,
+pr(X,3).
+pr(X,X) :- !. 
+pr(2):- !.
+pr(X,Y):- 0=\= X mod Y, Y1 is Y+2, pr(X,Y1).
+
 
