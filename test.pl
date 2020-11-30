@@ -14,6 +14,7 @@ pr(X):- 0 =\= X mod 2, pr(X,3).
 pr(X,X):- !.
 pr(X,Y):- 0 =\= X mod Y, Y1 is Y+2,	pr(X,Y1).
 
+%Создаем списки простых делителей
 createlist(X,Y,L):- createlist(X,Y,[],L).
 createlist(1,_,[],[]) :-!.
 createlist(X,Y,[Text|List],[Text|List]):- Y>X.
@@ -21,13 +22,11 @@ createlist(X,Y,L1,L) :- Nool is X mod Y, Nool == 0, pr(Y),
   append(L1,[Y],L2), Y1 is Y+1, createlist(X,Y1,L2,L).
 createlist(X,Y,L1,L):- Y1 is Y+1, createlist(X,Y1,L1,L).
 
+/Принадлежит ли элемент списку
 member(Text,[Text|_]) :- !.
 member(Text,[_|List]) :- member(Text,List).
 
-unite([], L, L):-!.
-unite([Text|List], L, AppendTail):- member(Text, L), !, unite(List, L, AppendTail).
-unite([Text|List], L, [Text|AppendTail]):- unite(List, L, AppendTail).
-
+/Формируем список без повторений
 nonrepeat([Text|List], ResultL) :- nonrepeat([Text|List], [], ResultL).
 nonrepeat([], L, L) :- !.
 nonrepeat([Text|List], ResultL1, L) :- createlist(Text,2,ResultL), union(ResultL1, ResultL, ResultL2),
