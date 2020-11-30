@@ -15,4 +15,9 @@ pr(X,X) :- !.
 pr(2):- !.
 pr(X,Y):- 0=\= X mod Y, Y1 is Y+2, pr(X,Y1).
 
-
+main:-
+	write("List length: "),read(N),
+	write("List: "), rlist(L,N), 
+	%Обработка списка тут будет
+	write("[ "), wlist(L), write("]"),!.
+	%Вместо L тут / будет обработанный список, а пока мы просто проверяем ввод и вывод
